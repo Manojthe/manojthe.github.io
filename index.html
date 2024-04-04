@@ -383,6 +383,59 @@ h3 {
 
 
 
+<!-- Container for text and button -->
+<div class="container">
+  <!-- Text container to display the extracted text -->
+  <div class="text-container" id="textContainer"></div>
+
+  <!-- Create a copy button -->
+  
+
+<!-- Create a copy button with Font Awesome icon -->
+<button class="copy-button" id="copyButton"><i class="fas fa-copy"></i> Copy Link</button>
+
+
+<!-- Script to dynamically populate text container and add copy button -->
+<script>
+window.onload = function() {
+  // Get the URL
+  var url = window.location.href;
+  // Find the index of "PIN="
+  var pinIndex = url.indexOf("PIN=");
+  // If "PIN=" is found
+  if (pinIndex !== -1) {
+    // Extract the text after "PIN="
+    var textAfterPin = url.substring(pinIndex + 4);
+    // Decode the URL-encoded text
+    var decodedText = decodeURIComponent(textAfterPin);
+    // Display the extracted text in the text container
+    document.getElementById("textContainer").innerText = decodedText;
+
+    // Add click event listener to copy text when button is clicked
+    document.getElementById("copyButton").addEventListener("click", function() {
+      // Copy the text from the text container to clipboard
+      var textToCopy = document.getElementById("textContainer").innerText;
+      // Create a temporary input element to copy the text
+      var tempInput = document.createElement("input");
+      tempInput.setAttribute("value", textToCopy);
+      // Append the input element to the body
+      document.body.appendChild(tempInput);
+      // Select the text inside the input element
+      tempInput.select();
+      tempInput.setSelectionRange(0, 99999); // For mobile devices
+      // Copy the selected text to clipboard
+      document.execCommand('copy');
+      // Alert the user that the text has been copied
+      alert('Text copied to clipboard!');
+      // Remove the temporary input element
+      document.body.removeChild(tempInput);
+    });
+  } else {
+    // If "PIN=" is not found, display a message
+    document.getElementById("textContainer").innerText = "No text found in URL";
+  }
+}
+</script>
 
 
 <!--Button Start-->
