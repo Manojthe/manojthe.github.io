@@ -477,31 +477,65 @@ h3 {
 
 
 
-<div class="containershare">
+
+<div class="container">
     <div class="social-buttons">
         <!-- WhatsApp -->
-        <a href="whatsapp://send?text=Check out this page: " class="social-button" title="Share on WhatsApp">
+        <a href="#" class="social-button whatsapp" title="Share on WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
         <!-- Facebook -->
-        <a href="https://www.facebook.com/sharer/sharer.php?u=" class="social-button" title="Share on Facebook">
+        <a href="#" class="social-button facebook" title="Share on Facebook">
             <i class="fab fa-facebook"></i>
         </a>
         <!-- Telegram -->
-        <a href="https://telegram.me/share/url?url=" class="social-button" title="Share on Telegram">
+        <a href="#" class="social-button telegram" title="Share on Telegram">
             <i class="fab fa-telegram"></i>
         </a>
         <!-- Instagram -->
-        <a href="https://www.instagram.com/?url=" class="social-button" title="Share on Instagram">
+        <a href="#" class="social-button instagram" title="Share on Instagram">
             <i class="fab fa-instagram"></i>
         </a>
         <!-- Snapchat -->
-        <a href="https://www.snapchat.com/" class="social-button" title="Share on Snapchat">
+        <a href="#" class="social-button snapchat" title="Share on Snapchat">
             <i class="fab fa-snapchat"></i>
         </a>
     </div>
 </div>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Function to share URL on WhatsApp
+    document.querySelector(".whatsapp").addEventListener("click", function(event) {
+        event.preventDefault();
+        window.location.href = "whatsapp://send?text=Check out this page: " + encodeURIComponent(window.location.href);
+    });
+
+    // Function to share URL on Facebook
+    document.querySelector(".facebook").addEventListener("click", function(event) {
+        event.preventDefault();
+        window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(window.location.href), "_blank");
+    });
+
+    // Function to share URL on Telegram
+    document.querySelector(".telegram").addEventListener("click", function(event) {
+        event.preventDefault();
+        window.open("https://telegram.me/share/url?url=" + encodeURIComponent(window.location.href), "_blank");
+    });
+
+    // Function to share URL on Instagram
+    document.querySelector(".instagram").addEventListener("click", function(event) {
+        event.preventDefault();
+        window.open("https://www.instagram.com/?url=" + encodeURIComponent(window.location.href), "_blank");
+    });
+
+    // Function to open Snapchat
+    document.querySelector(".snapchat").addEventListener("click", function(event) {
+        event.preventDefault();
+        window.open("https://www.snapchat.com/", "_blank");
+    });
+});
+</script>
 
 
 <br>
