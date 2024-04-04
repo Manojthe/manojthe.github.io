@@ -432,6 +432,45 @@ h3 {
 
 <!--Video Player End-->
 
+<div class="containerinfo">
+  
+  <!-- Start File Name -->
+  <strong><p id="file-name"></p></strong>
+  
+  <script>
+    function getFileName() {
+      // Get the current page URL
+      var url = decodeURIComponent(window.location.href);
+      
+      // Get the value of the 'PIN' parameter from the URL
+      var pinIndex = url.indexOf("PIN=") + 4;
+      var videoLink = url.substring(pinIndex);
+      
+      // Replace underscores (_) and plus signs (+) with spaces in the video link
+      videoLink = videoLink.replace(/_/g, ' ').replace(/\+/g, ' ');
+      
+      // Extract the file name from the video link by finding the last '/' character in the URL
+      var fileName = videoLink.substring(videoLink.lastIndexOf("/") + 1);
+      
+      // Remove all text after '.mp4' or '.mkv' from the extracted file name
+      fileName = fileName.replace(/(\.mp4|\.mkv).*$/i, '');
+      
+      // Replace underscores (_) and plus signs (+) with spaces in the extracted file name
+      fileName = fileName.replace(/_/g, ' ').replace(/\+/g, ' ');
+      
+      // Set the text content of the 'file-name' element to the extracted file name
+      document.getElementById("file-name").textContent = fileName;
+    }
+
+    // Call the getFileName function when the page finishes loading
+    window.addEventListener("load", getFileName);
+    
+    // Update the href attribute of the element with ID "demo3" (assuming it exists)
+    document.getElementById("demo3").href = videoLink;
+  </script>
+  
+  <!-- End File Name -->
+</div>
 
 
 
