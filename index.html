@@ -24,43 +24,37 @@
     
     
 <style>
-    /* Style for the container */
-    #container {
-        font-family: Arial, sans-serif;
-        font-size: 16px;
+   .containershare {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2px;
+    }
+
+    .social-buttons {
         display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .social-button {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #007bff;
+        display: flex;
+        justify-content: center;
         align-items: center;
-    }
-
-    /* Style for the text displaying current page URL */
-    #currentUrl {
-        white-space: nowrap; /* Prevent line breaks */
-        overflow: hidden; /* Hide overflowing text */
-        text-overflow: ellipsis; /* Display ellipsis for overflow */
-        margin-right: 10px;
-        padding: 5px 10px; /* Add padding */
-        background-color: #f0f0f0; /* Background color */
-        border: 1px solid #ccc; /* Border color */
-        border-radius: 5px; /* Border radius */
-    }
-
-    /* Style for the copy button */
-    #copyButton {
-        background-color: #4CAF50; /* Green */
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        cursor: pointer;
-        border-radius: 5px;
         transition: background-color 0.3s ease;
     }
 
-    /* Hover effect for the copy button */
-    #copyButton:hover {
-        background-color: #45a049;
+    .social-button:hover {
+        background-color: #0056b3;
+    }
+
+    .social-button i {
+        font-size: 24px;
+        color: #fff;
     }
 </style>
     
@@ -483,54 +477,30 @@ h3 {
 
 
 
-<!-- Container for text and button -->
-<div class="container12">
-  <!-- Text container to display the extracted text -->
-  <div class="text-container" id="textContainer"></div>
-
-  <!-- Create a copy button -->
-  
-
-<!-- Display current page URL and button to copy URL -->
-<div id="container">
-    <p id="currentUrl"><span id="urlDisplay"></span></p>
-    <button id="copyButton">Copy URL</button>
+<div class="containershare">
+    <div class="social-buttons">
+        <!-- WhatsApp -->
+        <a href="whatsapp://send?text=Check out this page: " class="social-button" title="Share on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/sharer/sharer.php?u=" class="social-button" title="Share on Facebook">
+            <i class="fab fa-facebook"></i>
+        </a>
+        <!-- Telegram -->
+        <a href="https://telegram.me/share/url?url=" class="social-button" title="Share on Telegram">
+            <i class="fab fa-telegram"></i>
+        </a>
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/?url=" class="social-button" title="Share on Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <!-- Snapchat -->
+        <a href="https://www.snapchat.com/" class="social-button" title="Share on Snapchat">
+            <i class="fab fa-snapchat"></i>
+        </a>
+    </div>
 </div>
-
-<script>
-// Function to copy current page URL
-function copyUrlToClipboard() {
-    // Get current page URL
-    var currentUrl = window.location.href;
-    
-    // Create a temporary input element
-    var tempInput = document.createElement("input");
-    tempInput.setAttribute("value", currentUrl);
-    
-    // Append the input element to the body
-    document.body.appendChild(tempInput);
-    
-    // Select the text inside the input element
-    tempInput.select();
-    tempInput.setSelectionRange(0, 99999); // For mobile devices
-    
-    // Copy the selected text to clipboard
-    document.execCommand('copy');
-    
-    // Remove the temporary input element
-    document.body.removeChild(tempInput);
-    
-    // Alert the user that the URL has been copied
-    alert('URL copied to clipboard!');
-}
-
-// Display current page URL
-document.getElementById("urlDisplay").innerText = window.location.href;
-
-// Add event listener to the copy button
-document.getElementById("copyButton").addEventListener("click", copyUrlToClipboard);
-</script>
-
 
 
 
