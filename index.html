@@ -24,48 +24,45 @@
     
     
 <style>
-  /* Style for text and button container */
-  .container12 {
-    /* Use flexbox for layout */
-    align-items: center; /* Center items vertically */
-    justify-content: space-between; /* Space between items */
-    margin-bottom: 10px;
-    
-  }
+    /* Style for the container */
+    #container {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+    }
 
-  /* Style for text container */
-  .text-container {
-    background-color: #F2F3DD;
-    color: black;
-    padding: 10px;
-    border: 1px solid #e3e3e3;
-    margin-right: 10px; /* Add margin to separate from button */
-    flex: 1; /* Allow the container to grow to fill available space */
-    white-space: nowrap; /* Prevent text from wrapping */
-    overflow: hidden; /* Hide overflowing text */
-    text-overflow: ellipsis; /* Display ellipsis for overflow */
-  }
+    /* Style for the text displaying current page URL */
+    #currentUrl {
+        white-space: nowrap; /* Prevent line breaks */
+        overflow: hidden; /* Hide overflowing text */
+        text-overflow: ellipsis; /* Display ellipsis for overflow */
+        margin-right: 10px;
+        padding: 5px 10px; /* Add padding */
+        background-color: #f0f0f0; /* Background color */
+        border: 1px solid #ccc; /* Border color */
+        border-radius: 5px; /* Border radius */
+    }
 
-  /* Style for copy button */
-  .copy-button {
-    cursor: pointer;
-    flex: 1;
-    background-color: #4CAF50;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 10px;
-   
-    transition: background-color 0.3s;
-  }
+    /* Style for the copy button */
+    #copyButton {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
 
-  /* Hover effect for copy button */
-  .copy-button:hover {
-    background-color: #45a049;
-  }
+    /* Hover effect for the copy button */
+    #copyButton:hover {
+        background-color: #45a049;
+    }
 </style>
-    
     
     
     
@@ -494,50 +491,44 @@ h3 {
   <!-- Create a copy button -->
   
 
-<!-- Create a copy button with Font Awesome icon -->
-<button class="copy-button" id="copyButton"><i class="fas fa-copy"></i> Copy Link</button>
+<!-- Display current page URL and button to copy URL -->
+<div id="container">
+    <p id="currentUrl"><span id="urlDisplay"></span></p>
+    <button id="copyButton">Copy URL</button>
+</div>
 
-
-<!-- Script to dynamically populate text container and add copy button -->
 <script>
-window.onload = function() {
-  // Get the URL
-  var url = window.location.href;
-  // Find the index of "PIN="
-  var pinIndex = url.indexOf("PIN=");
-  // If "PIN=" is found
-  if (pinIndex !== -1) {
-    // Extract the text after "PIN="
-    var textAfterPin = url.substring(pinIndex + 4);
-    // Decode the URL-encoded text
-    var decodedText = decodeURIComponent(textAfterPin);
-    // Display the extracted text in the text container
-    document.getElementById("textContainer").innerText = decodedText;
-
-    // Add click event listener to copy text when button is clicked
-    document.getElementById("copyButton").addEventListener("click", function() {
-      // Copy the text from the text container to clipboard
-      var textToCopy = document.getElementById("textContainer").innerText;
-      // Create a temporary input element to copy the text
-      var tempInput = document.createElement("input");
-      tempInput.setAttribute("value", textToCopy);
-      // Append the input element to the body
-      document.body.appendChild(tempInput);
-      // Select the text inside the input element
-      tempInput.select();
-      tempInput.setSelectionRange(0, 99999); // For mobile devices
-      // Copy the selected text to clipboard
-      document.execCommand('copy');
-      // Alert the user that the text has been copied
-      alert('Text copied to clipboard!');
-      // Remove the temporary input element
-      document.body.removeChild(tempInput);
-    });
-  } else {
-    // If "PIN=" is not found, display a message
-    document.getElementById("textContainer").innerText = "No text found in URL";
-  }
+// Function to copy current page URL
+function copyUrlToClipboard() {
+    // Get current page URL
+    var currentUrl = window.location.href;
+    
+    // Create a temporary input element
+    var tempInput = document.createElement("input");
+    tempInput.setAttribute("value", currentUrl);
+    
+    // Append the input element to the body
+    document.body.appendChild(tempInput);
+    
+    // Select the text inside the input element
+    tempInput.select();
+    tempInput.setSelectionRange(0, 99999); // For mobile devices
+    
+    // Copy the selected text to clipboard
+    document.execCommand('copy');
+    
+    // Remove the temporary input element
+    document.body.removeChild(tempInput);
+    
+    // Alert the user that the URL has been copied
+    alert('URL copied to clipboard!');
 }
+
+// Display current page URL
+document.getElementById("urlDisplay").innerText = window.location.href;
+
+// Add event listener to the copy button
+document.getElementById("copyButton").addEventListener("click", copyUrlToClipboard);
 </script>
 
 
