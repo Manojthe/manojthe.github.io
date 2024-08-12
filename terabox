@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch and Display Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        .result p {
+            margin: 10px 0;
+        }
+
+        .result a {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            background: linear-gradient(45deg, #007bff, #00c6ff);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .result a:hover {
+            background: linear-gradient(45deg, #0056b3, #00aaff);
+            transform: translateY(-2px);
+        }
+
+        .result a:active {
+            background: linear-gradient(45deg, #004080, #0084ff);
+            transform: translateY(0);
+        }
+
+        .result img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Fetch and Display Data</h1>
+        <div class="result">
+            <p><strong>Title:</strong> <span id="title">Loading...</span></p>
+            <a rel="noreferrer noopener" id="fastDownload" href="#" target="_blank">Fast Download</a>
+            <a rel="noreferrer noopener" id="hdDownload" href="#" target="_blank">HD Video</a>
+            <p><strong>Thumbnail:</strong></p>
+            <img id="thumbnail" src="" alt="Thumbnail" style="display: none;">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // URL of the API
+            const apiUrl = "https://wholly-api.skinnyrunner.com/get/website-data.php?get_html=https://www.terabox.tech/api/yttera?id=1EG_jSJFps_Gk3f_bkBkQ2w";
+
+            // Fetch the JSON data from the API
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Extract the relevant data
+                    const videoData = data.response[0];
+                    const title = videoData.title;
+                    const fastDownloadUrl = videoData.resolutions["Fast Download"];
+                    const hdDownloadUrl = videoData.resolutions["HD Video"];
+                    const thumbnailUrl = videoData.thumbnail;
+
+                    // Update the DOM with the extracted data
+                    document.getElementById('title').textContent = title;
+                    const fastDownloadLink = document.getElementById('fastDownload');
+                    fastDownloadLink.href = fastDownloadUrl;
+                    fastDownloadLink.textContent = "Fast Download";
+
+                    const hdDownloadLink = document.getElementById('hdDownload');
+                    hdDownloadLink.href = hdDownloadUrl;
+                    hdDownloadLink.textContent = "HD Video";
+
+                    const thumbnailImage = document.getElementById('thumbnail');
+                    if (thumbnailUrl) {
+                        thumbnailImage.src = thumbnailUrl;
+                        thumbnailImage.style.display = 'block';
+                    } else {
+                        thumbnailImage.style.display = 'none';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    document.getElementById('title').textContent = 'Error fetching data';
+                    document.getElementById('fastDownload').textContent = 'Error fetching data';
+                    document.getElementById('hdDownload').textContent = 'Error fetching data';
+                });
+        });
+    </script>
+</body>
+
+</html>
