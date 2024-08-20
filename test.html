@@ -1,253 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Sidebar with Header and Video Player</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* General styles */
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-        }
-
-        header {
-            background-color: #333;
-            color: white;
-            padding: 10px 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-sizing: border-box;
-            z-index: 2; /* Higher z-index to appear above the sidebar */
-            position: relative;
-        }
-
-        .header-title {
-            margin: 0;
-        }
-
-        .sidebar {
-            width: 250px;
-            background-color: #333;
-            color: white;
-            padding: 15px;
-            box-sizing: border-box;
-            transition: transform 0.3s ease;
-            position: absolute;
-            height: calc(100% - 40px); /* Adjust for header height */
-            top: 40px; /* Adjust for header height */
-            left: 0;
-            transform: translateX(0);
-            z-index: 1; /* Lower z-index to appear behind the header */
-        }
-
-        .sidebar.closed {
-            transform: translateX(-100%);
-        }
-
-        .content {
-            flex: 1;
-            padding: 0px;
-            background-color: #f4f4f4;
-            margin-left: 250px; /* Adjust based on sidebar width */
-            transition: margin-left 0.3s ease;
-            margin-top: 0px; /* Adjust for header height */
-            justify-content: center;
-            align-items: center;
-            height: calc(100% - 40px); /* Adjust for header height */
-            display: flex;
-            flex-direction: column;
-        }
-
-        .toggle-btn {
-            display: none;
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background-color: #333;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            z-index: 2; /* Ensure it is above the sidebar */
-            font-size: 18px;
-        }
-
-        .toggle-btn.open {
-            background-color: #666;
-        }
-
-        /* Video player styles */
-        video {
-            margin-top: 5px;
-            margin-right: 10px; /* Adds 10px margin on all sides */
-            width: 100%; /* Ensures video does not exceed container width */
-            height: auto; /* Maintains aspect ratio */
-        }
-
-        /* Movie container styles */
-        .movie-container {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-            text-align: center;
-            position: relative; /* Ensures the rotated text stays within the container */
-            overflow: hidden; /* Hides any overflow caused by rotation */
-        }
-
-        /* Movie title styles */
-        .movie-title {
-            font-size: 1.5em;
-            color: #333;
-            margin: 0;
-            display: inline-block; /* Ensures rotation applies properly */
-            white-space: nowrap; /* Prevents text from wrapping */
-        }
-
-        /* New containers styles */
-        .action-containers {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .action-container {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .action-container .button {
-            padding: 10px 20px;
-            font-size: 1em;
-            border: none;
-            border-radius: 5px;
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .action-container .button:first-child {
-            background-color: #007bff; /* Blue color for MX and VLC */
-        }
-
-        .action-container .button:first-child:hover {
-            background-color: #0056b3;
-        }
-
-        .action-container .button:nth-child(2) {
-            background-color: #007bff; /* Blue color for VLC Player */
-        }
-
-        .action-container .button:nth-child(2):hover {
-            background-color: #0056b3;
-        }
-
-        .action-container .button:last-child {
-            background-color: #28a745; /* Green color for Download */
-        }
-
-        .action-container .button:last-child:hover {
-            background-color: #218838;
-        }
-
-        /* Responsive styles */
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 200px;
-                transform: translateX(-100%);
-                position: fixed;
-                height: calc(100% - 40px); /* Adjust for header height */
-                top: 40px; /* Adjust for header height */
-            }
-
-            .sidebar.open {
-                transform: translateX(0);
-            }
-
-            .content {
-                margin-left: 0;
-                margin-top: 0px; /* Adjust for header height */
-                height: calc(100% - 40px); /* Adjust for header height */
-            }
-
-            .toggle-btn {
-                display: block;
-            }
-
-            .action-containers {
-                flex-direction: column;
-            }
-
-            .action-container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .action-container .button {
-                width: 100%;
-                margin-bottom: 10px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1 class="header-title">My Website</h1>
-        <button class="toggle-btn" id="toggle-btn">
-            <i class="fas fa-bars"></i> <!-- Font Awesome bars icon -->
-        </button>
-    </header>
-    <aside class="sidebar" id="sidebar">
-        <h2>Sidebar</h2>
-        <p>This is the sidebar content.</p>
-    </aside>
-    <main class="content">
-        <!-- HTML5 video player with margin -->
-        <video controls width="800" height="450">
-            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <!-- Movie container -->
-        <div class="movie-container">
-            <p class="movie-title">Movie Name</p>
-            <!-- New containers -->
-            <div class="action-containers">
-                <!-- First container with player buttons -->
-                <div class="action-container">
-                    <button class="button">MX</button>
-                    <button class="button">VLC</button>
-                </div>
-                <!-- Second container with download button -->
-                <div class="action-container">
-                    <button class="button">Download</button>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        const sidebar = document.getElementById('sidebar');
-        const toggleBtn = document.getElementById('toggle-btn');
-
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('open');
-            if (sidebar.classList.contains('open')) {
-                toggleBtn.innerHTML = '<i class="fas fa-times"></i>'; // Font Awesome close icon
-            } else {
-                toggleBtn.innerHTML = '<i class="fas fa-bars"></i>'; // Font Awesome bars icon
-            }
-        });
-    </script>
-</body>
-</html>
+.btn {
+		background-image:  linear-gradient(90deg, #1c84a6, #3CB371);
+		overflow: hidden;
+		height: 45px;
+	}
+	
+	i {
+		position: relative;
+		margin: 0 !important;
+		top: 10px;
+		transition: all .3s ease-in-out;
+		opacity: 1;			
+	}
+	
+	i.back {
+		font-family: $Lato;
+		color: white;
+		font-size: 15px;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		transform: translateY(30px);
+		opacity: 0;
+	}
+	
+	&:hover i.front {
+		transform: translateY(-30px);
+		opacity: 0;			
+	}
+	
+	&:hover i.back {
+		transform: translateY(-20px);
+		opacity: 1;			
+	}
