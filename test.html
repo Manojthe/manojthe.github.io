@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Sidebar with Header and Icons</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: border-box;
+            z-index: 2; /* Higher z-index to appear above the sidebar */
+            position: relative;
+        }
+
+        .header-title {
+            margin: 0;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            box-sizing: border-box;
+            transition: transform 0.3s ease;
+            position: absolute;
+            height: calc(100% - 40px); /* Adjust for header height */
+            top: 40px; /* Adjust for header height */
+            left: 0;
+            transform: translateX(0);
+            z-index: 1; /* Lower z-index to appear behind the header */
+        }
+
+        .sidebar.closed {
+            transform: translateX(-100%);
+        }
+
+        .content {
+            flex: 1;
+            padding: 15px;
+            background-color: #f4f4f4;
+            margin-left: 250px; /* Adjust based on sidebar width */
+            transition: margin-left 0.3s ease;
+            margin-top: 40px; /* Adjust for header height */
+        }
+
+        .toggle-btn {
+            display: none;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 2; /* Ensure it is above the sidebar */
+            font-size: 18px;
+        }
+
+        .toggle-btn.open {
+            background-color: #666;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+                transform: translateX(-100%);
+                position: fixed;
+                height: calc(100% - 40px); /* Adjust for header height */
+                top: 40px; /* Adjust for header height */
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .content {
+                margin-left: 0;
+                margin-top: 0px; /* Adjust for header height */
+            }
+
+            .toggle-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="header-title">My Website</h1>
+        <button class="toggle-btn" id="toggle-btn">
+            <i class="fas fa-bars"></i> <!-- Font Awesome bars icon -->
+        </button>
+    </header>
+    <aside class="sidebar" id="sidebar">
+        <h2>Sidebar</h2>
+        <p>This is the sidebar content.</p>
+    </aside>
+    <main class="content">
+       
+    </main>
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggle-btn');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            if (sidebar.classList.contains('open')) {
+                toggleBtn.innerHTML = '<i class="fas fa-times"></i>'; // Font Awesome close icon
+            } else {
+                toggleBtn.innerHTML = '<i class="fas fa-bars"></i>'; // Font Awesome bars icon
+            }
+        });
+    </script>
+</body>
+</html>
