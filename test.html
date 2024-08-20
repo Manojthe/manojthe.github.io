@@ -104,14 +104,61 @@
             overflow: hidden; /* Hides any overflow caused by rotation */
         }
 
-        /* Movie title styles with rotation */
+        /* Movie title styles */
         .movie-title {
             font-size: 1.5em;
             color: #333;
             margin: 0;
-            transform: rotate(-15deg); /* Rotate text to the left */
             display: inline-block; /* Ensures rotation applies properly */
             white-space: nowrap; /* Prevents text from wrapping */
+        }
+
+        /* New containers styles */
+        .action-containers {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .action-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .action-container .button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .action-container .button:first-child {
+            background-color: #007bff; /* Blue color for MX and VLC */
+        }
+
+        .action-container .button:first-child:hover {
+            background-color: #0056b3;
+        }
+
+        .action-container .button:nth-child(2) {
+            background-color: #007bff; /* Blue color for VLC Player */
+        }
+
+        .action-container .button:nth-child(2):hover {
+            background-color: #0056b3;
+        }
+
+        .action-container .button:last-child {
+            background-color: #28a745; /* Green color for Download */
+        }
+
+        .action-container .button:last-child:hover {
+            background-color: #218838;
         }
 
         /* Responsive styles */
@@ -137,6 +184,20 @@
             .toggle-btn {
                 display: block;
             }
+
+            .action-containers {
+                flex-direction: column;
+            }
+
+            .action-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .action-container .button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
@@ -160,6 +221,18 @@
         <!-- Movie container -->
         <div class="movie-container">
             <p class="movie-title">Movie Name</p>
+            <!-- New containers -->
+            <div class="action-containers">
+                <!-- First container with player buttons -->
+                <div class="action-container">
+                    <button class="button">MX</button>
+                    <button class="button">VLC</button>
+                </div>
+                <!-- Second container with download button -->
+                <div class="action-container">
+                    <button class="button">Download</button>
+                </div>
+            </div>
         </div>
     </main>
 
