@@ -59,10 +59,11 @@
             margin-left: 250px; /* Adjust based on sidebar width */
             transition: margin-left 0.3s ease;
             margin-top: 0px; /* Adjust for header height */
-           
             justify-content: center;
             align-items: center;
             height: calc(100% - 40px); /* Adjust for header height */
+            display: flex;
+            flex-direction: column;
         }
 
         .toggle-btn {
@@ -85,9 +86,32 @@
 
         /* Video player styles */
         video {
+            margin-top: 5px;
             margin-right: 10px; /* Adds 10px margin on all sides */
             width: 100%; /* Ensures video does not exceed container width */
             height: auto; /* Maintains aspect ratio */
+        }
+
+        /* Movie container styles */
+        .movie-container {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            text-align: center;
+            position: relative; /* Ensures the rotated text stays within the container */
+            overflow: hidden; /* Hides any overflow caused by rotation */
+        }
+
+        /* Movie title styles with rotation */
+        .movie-title {
+            font-size: 1.5em;
+            color: #333;
+            margin: 0;
+            transform: rotate(-15deg); /* Rotate text to the left */
+            display: inline-block; /* Ensures rotation applies properly */
+            white-space: nowrap; /* Prevents text from wrapping */
         }
 
         /* Responsive styles */
@@ -133,6 +157,10 @@
             <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
+        <!-- Movie container -->
+        <div class="movie-container">
+            <p class="movie-title">Movie Name</p>
+        </div>
     </main>
 
     <script>
