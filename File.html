@@ -125,7 +125,35 @@ h3 {
   
 </style>
 
-   <script>
+ <style>
+        #con1, #con2 {
+            display: none;
+        }
+        #con2 {
+            display: block; /* Make con2 visible by default */
+        }
+
+        button {
+            padding: 10px 20px; /* Add padding around the text */
+            font-size: 16px; /* Set the font size */
+            color: white; /* Set the text color */
+            background-color: #007BFF; /* Set the background color */
+            border: none; /* Remove the border */
+            border-radius: 5px; /* Round the corners */
+            cursor: pointer; /* Change the cursor to a pointer */
+            transition: background-color 0.3s ease; /* Add a transition effect */
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Change background color on hover */
+        }
+
+        button:focus {
+            outline: none; /* Remove the default outline */
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Add a custom focus outline */
+        }
+    </style>
+    <script>
         let isCon1Visible = false; // Track visibility state
         let countdownInterval;
 
@@ -158,34 +186,6 @@ h3 {
             }, 1000); // Update every second
         }
     </script>
- <style>
-        #con1, #con2 {
-            display: none;
-        }
-        #con2 {
-            display: block; /* Make con2 visible by default */
-        }
-
-        button {
-            padding: 10px 20px; /* Add padding around the text */
-            font-size: 16px; /* Set the font size */
-            color: white; /* Set the text color */
-            background-color: #007BFF; /* Set the background color */
-            border: none; /* Remove the border */
-            border-radius: 5px; /* Round the corners */
-            cursor: pointer; /* Change the cursor to a pointer */
-            transition: background-color 0.3s ease; /* Add a transition effect */
-        }
-
-        button:hover {
-            background-color: #0056b3; /* Change background color on hover */
-        }
-
-        button:focus {
-            outline: none; /* Remove the default outline */
-            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Add a custom focus outline */
-        }
-    </style>
   
 </head>
 <body>
@@ -222,14 +222,6 @@ h3 {
     </div>
   </div>
 </nav>
-
- <div id="con2">
-        <button onclick="toggleVisibility()">Toggle Visibility</button>
-    </div>
-
-<div id="con1">
-
-
   
 <div class="container">
 
@@ -395,6 +387,13 @@ document.getElementById("demol").innerHTML = videoLink;
   <!-- Button -->
 
   <!--Button Start-->
+  
+  <div id="con2">
+        <button onclick="toggleVisibility()">Toggle Visibility</button>
+    </div>
+  
+  
+  <div id="con1">
   <div class="con1">
 
 
@@ -414,7 +413,7 @@ document.getElementById("demol").innerHTML = videoLink;
 
            <a id="dl-link" 
     href="" class="block" target="_blank" ><i class="fa fa-download"></i> Download File</a>
-
+</div>
   <!--Button End-->
   <!-- Button -->
 
@@ -458,7 +457,7 @@ document.getElementById("demol").innerHTML = videoLink;
   </script>
      
   </script>
-  </div>
+  
   
   
   
