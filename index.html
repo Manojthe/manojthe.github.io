@@ -125,68 +125,8 @@ h3 {
   
 </style>
 
- <style>
-        #con1, #con2 {
-            display: none;
-        }
-        #con2 {
-            display: block; /* Make con2 visible by default */
-        }
 
-        button {
-            padding: 10px 20px; /* Add padding around the text */
-            font-size: 16px; /* Set the font size */
-            color: white; /* Set the text color */
-            background-color: #007BFF; /* Set the background color */
-            border: none; /* Remove the border */
-            border-radius: 5px; /* Round the corners */
-            cursor: pointer; /* Change the cursor to a pointer */
-            transition: background-color 0.3s ease; /* Add a transition effect */
-        }
-
-        button:hover {
-            background-color: #0056b3; /* Change background color on hover */
-        }
-
-        button:focus {
-            outline: none; /* Remove the default outline */
-            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Add a custom focus outline */
-        }
-    </style>
-    <script>
-        let isCon1Visible = false; // Track visibility state
-        let countdownInterval;
-
-        function toggleVisibility() {
-            const con1 = document.getElementById('con1');
-            const con2 = document.getElementById('con2');
-            const button = con2.querySelector('button');
-            let countdown = 10; // Countdown time in seconds
-
-            // Start the countdown
-            button.textContent = `Wait ${countdown} seconds`;
-
-            countdownInterval = setInterval(() => {
-                countdown--;
-                button.textContent = `Wait ${countdown} seconds`;
-
-                if (countdown <= 0) {
-                    clearInterval(countdownInterval); // Stop the countdown
-                    button.textContent = 'Toggle Visibility'; // Reset button text
-                    // Toggle visibility
-                    if (isCon1Visible) {
-                        con1.style.display = 'none';
-                        con2.style.display = 'block';
-                    } else {
-                        con1.style.display = 'block';
-                        con2.style.display = 'none';
-                    }
-                    isCon1Visible = !isCon1Visible; // Toggle the state
-                }
-            }, 1000); // Update every second
-        }
-    </script>
-  
+   
 </head>
 <body>
 
@@ -388,18 +328,7 @@ document.getElementById("demol").innerHTML = videoLink;
 
   <!--Button Start-->
   
-  <div id="con2">
-        <center>
-            <button onclick="toggleVisibility()" style="margin-bottom: 10px;">I am not Robot</button>
-            
-             <p style="color: #b3b3b3;">
-  <strong>Human Verification Button</strong>
-</p>
-            <script async="async" data-cfasync="false" src="//twinelandlord.com/adc9bbee11824087e954fead49a2c281/invoke.js"></script>
-<div id="container-adc9bbee11824087e954fead49a2c281"></div>
-            
-        </center>
-    </div>
+
   
   
   <div id="con1">
@@ -477,7 +406,6 @@ document.getElementById("demol").innerHTML = videoLink;
   
   
   
-
 
 
 
