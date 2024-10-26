@@ -240,11 +240,12 @@
         <div id="container-b47926c733145402e4541962a46a571f"></div>
     <!-- Second Download Button Above Conclusion -->
         
-    <button id="secondDownloadButton" class="download-button hidden">
-        <a href="https://www.google.com" target="_blank" style="color: inherit; text-decoration: none;">
-            <i class="fas fa-download"></i> Download File
-        </a>
-    </button>
+        <button id="secondDownloadButton" class="download-button hidden">
+            <a href="#" id="secondDownloadLink" target="_blank" style="color: inherit; text-decoration: none;">
+                <i class="fas fa-download"></i> Download File
+            </a>
+        </button>
+
         <br>
         <br>
 
@@ -276,26 +277,38 @@
     const message = document.getElementById("downloadMessage");
     const secondButton = document.getElementById("secondDownloadButton");
 
-    // Timer to update button text and enable button
-    const timer = setInterval(() => {
-        if (countdown > 1) {
-            countdown--;
-            button.innerHTML = `<i class="fas fa-download"></i> Download in ${countdown} seconds`;
-        } else {
-            clearInterval(timer);
-            button.innerHTML = `<i class="fas fa-download"></i> Download`;
-            button.classList.add("active");
-            button.disabled = false;
-            message.style.display = "block";
-        }
-    }, 1000);
 
-    // Show the second button and scroll to it on first button click
-    button.addEventListener("click", () => {
-        secondButton.classList.remove("hidden");  // Show second button
-        secondButton.scrollIntoView({ behavior: "smooth", block: "center" }); // Scroll to the second button
-    });
-</script>
+    // Get the UID from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const uidValue = urlParams.get('UID'); // Get the value of UID
+    if (uidValue) {
+        secondDownloadLink.href = `http://stream-manojthe.koyeb.app/dl/${uidValue}`; // Set the download link
+    }
+
+
+
+    
+
+        // Timer to update button text and enable button
+        const timer = setInterval(() => {
+            if (countdown > 1) {
+                countdown--;
+                button.innerHTML = `<i class="fas fa-download"></i> Download in ${countdown} seconds`;
+            } else {
+                clearInterval(timer);
+                button.innerHTML = `<i class="fas fa-download"></i> Download`;
+                button.classList.add("active");
+                button.disabled = false;
+                message.style.display = "block";
+            }
+        }, 1000);
+
+        // Show the second button and scroll to it on first button click
+        button.addEventListener("click", () => {
+            secondButton.classList.remove("hidden");  // Show second button
+            secondButton.scrollIntoView({ behavior: "smooth", block: "center" }); // Scroll to the second button
+        });
+    </script>
 
     
 
